@@ -1,4 +1,5 @@
 import Functions
+import ai
 import os
 from art import *
 from termcolor import colored, cprint
@@ -15,25 +16,16 @@ def main_menu():
     return menunumber
 
 def pvp():
-    Functions.startboard()
-    while Functions.resultprint!=1:
-        Functions.player_move()
-        Functions.move()
-        Functions.printboard()
-        Functions.wincheck()
-        Functions.fullcheck()
-        Functions.resultprint()
-
-
-def PvP():
     name1 = input("Player1's name? ")
     name2 = input("Player2's name? ")
     play = 1
     player=1
     while play!=0:
         board=Functions.startboard()
+        Functions.printboard(board)
         game=1
         while game==1:
+            os.system('clear')
             if player==1:
                 print(name1+" turn!")
             else:
@@ -52,14 +44,51 @@ def PvP():
             if actual_result==2:
                 print(name2+" has won!")
                 game=0
-            gamedraw=Functions.fullcheck(board)
-            if gamedraw==1:
-                print("This game is a Draw!")
+            if game==1:
+                gamedraw=Functions.fullcheck(board)
+                if gamedraw==1:
+                    print("This game is a Draw!")
+                    game=0
+        replay=input("Do you want to play again?: ")
+        if replay=="n":
+            play=0
+
+def pva():
+    name1 = input("Player1's name? ")
+    play = 1
+    player=1
+    while play!=0:
+        board=Functions.startboard()
+        Functions.printboard(board)
+        game=1
+        while game==1:
+            os.system('clear')
+            if player==1:
+                print(name1+" turn!")
+                coord=Functions.player_move(board)
+            else:
+                coord=ai.ai_move(board)
+            board=Functions.move(coord,board,player)
+            if player==1:
+                player=2
+            else:
+                player=1
+            Functions.printboard(board)
+            actual_result=Functions.wincheck(board)
+            if actual_result==1:
+                print(name1+ ' has won!')
                 game=0
-            replay=input("Do you want to play again?: ")
-            if replay=="n":
-                play=0
-    return None
+            if actual_result==2:
+                print("Computer has won!")
+                game=0
+            if game==1:
+                gamedraw=Functions.fullcheck(board)
+                if gamedraw==1:
+                    print("This game is a Draw!")
+                    game=0
+        replay=input("Do you want to play again?: ")
+        if replay=="n":
+            play=0
     
            
 
