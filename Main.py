@@ -21,21 +21,22 @@ def pvp():
     play = 1
     player=1
     while play!=0:
-        board=Functions.startboard()
+        board=Functions.start_board()
+        os.system('clear')
         Functions.printboard(board)
         game=1
         while game==1:
-            os.system('clear')
             if player==1:
                 print(name1+" turn!")
             else:
                 print(name2+" turn!")
             coord=Functions.player_move(board)
-            board=Functions.move(coord,board,player)
+            board=Functions.move(board,coord,player)
             if player==1:
                 player=2
             else:
                 player=1
+            os.system('clear') 
             Functions.printboard(board)
             actual_result=Functions.wincheck(board)
             if actual_result==1:
@@ -106,3 +107,5 @@ while prog == 1:
 os.system('clear')
 byetext=text2art("Good Bye", font='broadway', chr_ignore=True)
 cprint(byetext, 'yellow', attrs=['bold'])
+
+main()
