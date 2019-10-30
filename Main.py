@@ -93,9 +93,14 @@ def pvA():
                 if gamedraw==1:
                     cprint("This game is a Draw!", "cyan", attrs=["bold"])
                     game=0
-        replay=input("Do you want to play again? ")
-        if replay=="n":
-            play=0
+        answer="z"        
+        while answer!="n":       
+            answer= input("Do you want to play again? y or n: ")
+            if answer=="n":
+                play=0
+                break
+            if answer=="y":
+                break
     
            
 
