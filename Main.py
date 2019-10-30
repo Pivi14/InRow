@@ -36,7 +36,7 @@ def pvp():
                 player=2
             else:
                 player=1
-            os.system('clear') 
+            os.system('clear')
             Functions.printboard(board)
             actual_result=Functions.wincheck(board)
             if actual_result==1:
@@ -50,8 +50,8 @@ def pvp():
                 if gamedraw==1:
                     cprint("This game is a Draw!", "cyan", attrs=["bold"])
                     game=0
-        answer="z"        
-        while answer!="n":       
+        answer="z"
+        while answer!="n":
             answer= input("Do you want to play again? y or n: ")
             if answer=="n":
                 play=0
@@ -93,11 +93,16 @@ def pvA():
                 if gamedraw==1:
                     cprint("This game is a Draw!", "cyan", attrs=["bold"])
                     game=0
-        replay=input("Do you want to play again? ")
-        if replay=="n":
-            play=0
-    
-           
+        answer = "z"
+        while answer != "n":
+            answer = input("Do you want to play again? y or n: ")
+            if answer == "n":
+                play = 0
+                break
+            if answer == "y":
+                break
+
+
 
 os.system('clear')
 prog = 1

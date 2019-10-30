@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1e757d1c-195a-4f0f-aa27-6bee10958f40" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Functions.py" afterDir="false" />
-    </list>
+    <list default="true" id="1e757d1c-195a-4f0f-aa27-6bee10958f40" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Functions">
+  <component name="RunManager" selected="Python.Main">
     <configuration name="Functions" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="InRow" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -136,8 +134,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.Main" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.Functions" />
         <item itemvalue="Python.Main" />
         <item itemvalue="Python.ai" />
