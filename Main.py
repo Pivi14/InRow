@@ -11,8 +11,8 @@ def main_menu():
     cprint(text2, "white", attrs=["bold"])
     cprint("by In 3 Calories\n", "cyan", attrs=["bold"])
     gameplay = 0
-    print(' (1) Player vs Player\n', '(2) Player vs AI\n', '(3) Exit')
-    menunumber = int(input())
+    cprint('(1) Player vs Player\n(2) Player vs AI\n(3) Exit', "yellow", attrs=["bold"])
+    menunumber = int(input(" Give me a number: "))
     return menunumber
 
 def pvp():
@@ -27,9 +27,9 @@ def pvp():
         game=1
         while game==1:
             if player==1:
-                print(name1+" turn!")
+                cprint(name1+" turn!", "red", attrs=["bold"])
             else:
-                print(name2+" turn!")
+                cprint(name2+" turn!", "green", attrs=["bold"])
             coord=Functions.player_move(board)
             board=Functions.move(board,coord,player)
             if player==1:
@@ -40,54 +40,60 @@ def pvp():
             Functions.printboard(board)
             actual_result=Functions.wincheck(board)
             if actual_result==1:
-                print(name1+ ' has won!')
+                cprint(name1+ ' has won!', "red", attrs=["bold"])
                 game=0
             if actual_result==2:
-                print(name2+" has won!")
+                cprint(name2+" has won!" , "green", attrs=["bold"])
                 game=0
             if game==1:
                 gamedraw=Functions.fullcheck(board)
                 if gamedraw==1:
-                    print("This game is a Draw!")
+                    cprint("This game is a Draw!", "cyan", attrs=["bold"])
                     game=0
-        replay=input("Do you want to play again?: ")
-        if replay=="n":
-            play=0
+        answer="z"        
+        while answer!="n":       
+            answer= input("Do you want to play again? y or n: ")
+            if answer=="n":
+                play=0
+                break
+            if answer=="y":
+                break
 
-def pva():
+def pvA():
     name1 = input("Player1's name? ")
     play = 1
     player=1
     while play!=0:
-        board=Functions.startboard()
+        board=Functions.start_board()
+        os.system('clear')
         Functions.printboard(board)
         game=1
         while game==1:
-            os.system('clear')
             if player==1:
-                print(name1+" turn!")
+                cprint(name1+" turn!", "red", attrs=["bold"])
                 coord=Functions.player_move(board)
             else:
                 coord=ai.ai_move(board)
-            board=Functions.move(coord,board,player)
+            board=Functions.move(board,coord,player)
             if player==1:
                 player=2
             else:
                 player=1
+            os.system('clear')
             Functions.printboard(board)
             actual_result=Functions.wincheck(board)
             if actual_result==1:
-                print(name1+ ' has won!')
+                cprint(name1+ ' has won!', "red", attrs=["bold"])
                 game=0
             if actual_result==2:
-                print("Computer has won!")
+                cprint("Computer has won! :(", "yellow", attrs=["bold"])
                 game=0
             if game==1:
                 gamedraw=Functions.fullcheck(board)
                 if gamedraw==1:
-                    print("This game is a Draw!")
+                    cprint("This game is a Draw!", "cyan", attrs=["bold"])
                     game=0
-        replay=input("Do you want to play again?: ")
+        replay=input("Do you want to play again? ")
         if replay=="n":
             play=0
     
@@ -108,4 +114,4 @@ os.system('clear')
 byetext=text2art("Good Bye", font='broadway', chr_ignore=True)
 cprint(byetext, 'yellow', attrs=['bold'])
 
-main()
+
