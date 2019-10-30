@@ -19,22 +19,31 @@ def start_board():
 
 
 def player_move(matrix):
-    valid_coordinate=False
     max_lenght=len(matrix)
+    abcs_raw=["A","B","C","D","E","F","G","H","I","J"]
+    abcs=abcs_raw[0:max_lenght]
+    valid_coordinate=False
     while valid_coordinate==False:
-        row=input("Give a row: ")
+        row=None
+        while row not in abcs:
+            row=input("Give a row: ").upper()
+            if row=="QUIT":
+                return None
+            if row not in abcs:
+                cprint("Not valid row!","yellow", attrs=["bold"])
+        row=abcs.index(row)
         col=input("Give a column: ")
         try:
             row=int(row)
             col=int(col)
         except:
             continue
-        if isinstance(row, int) and isinstance(col, int) and row<=max_lenght and row>0 and col<=max_lenght and col>0:
-            if matrix[row-1][col-1]==0:
+        if isinstance(row, int) and isinstance(col, int) and row<=max_lenght and row>=0 and col<=max_lenght and col>0:
+            if matrix[row][col-1]==0:
                 valid_coordinate=True
         else:
             print("Wrong input, try again!")
-    return row-1,col-1
+    return row,col-1
 
 
 
@@ -51,6 +60,7 @@ def move(matrix,coord,player):
 
 def printboard(n):
     board = copy.deepcopy(n)
+    abcs=["A","B","C","D","E","F","G","H","I","J"]
     for i in range(len(n)):
         for y in range(len(n[i])):
             if n[i][y] == 0:
@@ -60,9 +70,10 @@ def printboard(n):
             elif n[i][y] == 2:
                 board[i][y] = colored('O', 'green', attrs=['bold'])
     maxlistsizes=["1","2","3","4","5","6","7","8","9","10"]
-    print(" "*5 + "   ".join(maxlistsizes[0:len(board)]))
+    print(" "*5 + " | ".join(maxlistsizes[0:len(board)]))
+    print("\n")
     for row in range(len(n)):
-        print((row+1),"   "+" | ".join(board[row])+'\n')
+        print((abcs[row]),"   "+" | ".join(board[row])+'\n')
 
 
 def negative_check(raw_board_line):

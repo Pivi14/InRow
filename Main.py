@@ -5,11 +5,11 @@ from art import *
 from termcolor import colored, cprint
 
 def main_menu():
-    text=text2art('In', font='broadway',chr_ignore=True)
-    text2=text2art('Row', font='broadway',chr_ignore=True)
-    cprint(text, "yellow", attrs=["bold"], )
-    cprint(text2, "white", attrs=["bold"])
-    cprint("by In 3 Calories\n", "cyan", attrs=["bold"])
+    text=text2art('In', font='block',chr_ignore=True)
+    text2=text2art('Row', font='block',chr_ignore=True)
+    cprint(text, "cyan", attrs=["bold"], )
+    cprint(text2, "cyan", attrs=["bold"])
+    cprint("by In 3 Calories\n", "red", attrs=["bold"])
     gameplay = 0
     cprint('(1) Player vs Player\n(2) Player vs AI\n(3) Exit', "yellow", attrs=["bold"])
     menunumber = int(input(" Give me a number: "))
@@ -31,12 +31,14 @@ def pvp():
             else:
                 cprint(name2+" turn!", "green", attrs=["bold"])
             coord=Functions.player_move(board)
+            if coord==None:
+                return None
             board=Functions.move(board,coord,player)
             if player==1:
                 player=2
             else:
                 player=1
-            os.system('clear') 
+            os.system('clear')
             Functions.printboard(board)
             actual_result=Functions.wincheck(board)
             if actual_result==1:
@@ -50,8 +52,8 @@ def pvp():
                 if gamedraw==1:
                     cprint("This game is a Draw!", "cyan", attrs=["bold"])
                     game=0
-        answer="z"        
-        while answer!="n":       
+        answer="z"
+        while answer!="n":
             answer= input("Do you want to play again? y or n: ")
             if answer=="n":
                 play=0
@@ -72,6 +74,8 @@ def pvA():
             if player==1:
                 cprint(name1+" turn!", "red", attrs=["bold"])
                 coord=Functions.player_move(board)
+                if coord==None:
+                    return None
             else:
                 coord=ai.ai_move(board)
             board=Functions.move(board,coord,player)
@@ -93,16 +97,16 @@ def pvA():
                 if gamedraw==1:
                     cprint("This game is a Draw!", "cyan", attrs=["bold"])
                     game=0
-        answer="z"        
-        while answer!="n":       
-            answer= input("Do you want to play again? y or n: ")
-            if answer=="n":
-                play=0
+        answer = "z"
+        while answer != "n":
+            answer = input("Do you want to play again? y or n: ")
+            if answer == "n":
+                play = 0
                 break
-            if answer=="y":
+            if answer == "y":
                 break
-    
-           
+
+
 
 os.system('clear')
 prog = 1
