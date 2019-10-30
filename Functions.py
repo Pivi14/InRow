@@ -1,3 +1,9 @@
+import copy
+from art import *
+from termcolor import colored, cprint
+
+
+
 def start_board():
     matrix=[]
     size=1
@@ -16,31 +22,49 @@ def player_move(matrix):
     valid_coordinate=False
     max_lenght=len(matrix)
     while valid_coordinate==False:
-        row=int(input("Give a row: "))-1
-        col=int(input("Give a column: "))-1
-        if (row<=max_lenght and row>0 and col<=max_lenght and col>0):
-            if matrix[row][col]==0:
+        row=input("Give a row: ")
+        col=input("Give a column: ")
+        try:
+            row=int(row)
+            col=int(col)
+        except:
+            continue
+        if isinstance(row, int) and isinstance(col, int) and row<=max_lenght and row>0 and col<=max_lenght and col>0:
+            if matrix[row-1][col-1]==0:
                 valid_coordinate=True
         else:
             print("Wrong input, try again!")
-    return row,col
-    
+    return row-1,col-1
+
+
+
 def move(matrix,coord,player):
+    row=coord[0]
+    colum=coord[1]
     if player==1:
-        matrix[coord[0]][coord[1]]=1
+        matrix[row][colum]=1
     if player==2:
-        matrix[coord[0]][coord[1]]=2
+        matrix[row][colum]=2
     return matrix
 
 
-if __name__ == '__main__':
-    board = start_board()
-    coord=player_move(board)
-    player=1
-    move(board,coord,player)
-    
-        
-        
+
+def printboard(n):
+    board = copy.deepcopy(n)
+    for i in range(len(n)):
+        for y in range(len(n[i])):
+            if n[i][y] == 0:
+                board[i][y] = '.'
+            elif n[i][y] == 1:
+                board[i][y] = colored('X', 'red', attrs=['bold'])
+            elif n[i][y] == 2:
+                board[i][y] = colored('O', 'green', attrs=['bold'])
+    maxlistsizes=["1","2","3","4","5","6","7","8","9","10"]
+    print(" "*5 + "   ".join(maxlistsizes[0:len(board)]))
+    for row in range(len(n)):
+        print((row+1),"   "+" | ".join(board[row])+'\n')
+
+
 def negative_check(raw_board_line):
     for i in range(len(raw_board_line)):
         for y in range(len(raw_board_line[i])):
@@ -96,12 +120,12 @@ def wincheck(board):
             for y in range(len(board[i])):
                 check = win_check_list(board, matrix_size, i, y)
                 if player1_win in check:
-                    return True, 1
+                    return 1
                 elif player2_win in check:
-                    return True, 2
+                    return 2
                 else:
                     continue
-        return False, 0
+        return 0
 
     elif matrix_size > 4 and matrix_size < 8:
         player1_win = [1, 1, 1, 1]
@@ -109,12 +133,12 @@ def wincheck(board):
         for i in range(len(board)):
             for y in range(len(board[i])):
                 if player1_win in win_check_list(board, matrix_size, i, y):
-                    return True, 1
+                    return 1
                 elif player2_win in win_check_list(board, matrix_size, i, y):
-                    return True, 2
+                    return 2
                 else:
                     continue
-        return False, 0
+        return 0
 
     elif matrix_size > 7:
         player1_win = [1, 1, 1, 1, 1]
@@ -122,15 +146,15 @@ def wincheck(board):
         for i in range(len(board)):
             for y in range(len(board[i])):
                 if player1_win in win_check_list(board, matrix_size, i, y):
-                    return True, 1
+                    return 1
                 elif player2_win in win_check_list(board, matrix_size, i, y):
-                    return True, 2
+                    return 2
                 else:
                     continue
-        return False, 0
+        return 0
 
 
-def is_full(board):
+def fullcheck(board):
     fullboard = board
     board_size = len(board)
     check = 0
