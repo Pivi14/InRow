@@ -11,7 +11,7 @@ def main_menu():
     cprint(text2, "cyan", attrs=["bold"])
     cprint("by In 3 Calories\n", "red", attrs=["bold"])
     gameplay = 0
-    cprint('(1) Player vs Player\n(2) Player vs AI\n(3) Exit', "yellow", attrs=["bold"])
+    cprint('(1) Player vs Player\n(2) Player vs AI\n(3) Rules\n(4) Exit', "yellow", attrs=["bold"])
     menunumber = int(input(" Give me a number: "))
     return menunumber
 
@@ -118,6 +118,10 @@ while prog == 1:
     elif game == 2:
         pvA()
     elif game == 3:
+        os.system('clear')
+        cprint(""" In every game you choose the table size from 3x3 to 10x10\n You play '3 in a row' form 3x3 to 4x4\n'4 in a row' from 5x5 to 7x7 and play\n'5 in a row' from 8x8 to 10x10\n\n If you want to quit anytime during the game type 'quit'\n""","yellow", attrs=["bold"])
+        easter_egg=input("press ENTER")
+    elif game == 4:
         prog = 0
 os.system('clear')
 byetext=text2art("Good Bye", font='broadway', chr_ignore=True)
