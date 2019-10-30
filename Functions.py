@@ -87,7 +87,8 @@ def win_check_list(board, matrix_size, row, col):
     board_line = board_line_add(negative_check(raw_board_line), board)
     return board_line
 
-def has_won(board, matrix_size):
+def wincheck(board):
+    matrix_size = len(board)
     if matrix_size < 5:
         player1_win = [1, 1, 1]
         player2_win = [2, 2, 2]
